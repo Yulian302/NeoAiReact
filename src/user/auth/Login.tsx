@@ -5,7 +5,8 @@ import {
 	useEffect,
 	useState,
 } from "react"
-import { useNavigate } from "react-router-dom"
+
+import { Link, useNavigate } from "react-router-dom"
 import { GOOGLE_AUTH_URL, params } from "../../api/google-0auth"
 import loginUser from "../../api/loginUser"
 import DarkLightButton from "../../components/ui/DarkLightButton"
@@ -30,7 +31,7 @@ const Login = () => {
 		if (isAuthenticated) {
 			navigate("/home")
 		}
-	}, [])
+	}, [isAuthenticated, navigate])
 
 	useEffect(() => {
 		setMessage({
@@ -38,13 +39,14 @@ const Login = () => {
 			success: false,
 		})
 	}, [username, password])
-	const submitLogin = async (event: any) => {
-		event.preventDefault()
+
+	const submitLogin = async () => {
 		const response = await loginUser({
 			username,
 			password,
 		})
-		if (response.status == 200) {
+
+		if (response.status === 200) {
 			setAuthStatus(true)
 			const responseData = await response.data
 			navigate("/home")
@@ -57,7 +59,6 @@ const Login = () => {
 			})
 		}
 	}
-
 	const loginWith0Auth = (provider: string) => {
 		switch (provider) {
 			case "google": {
@@ -87,7 +88,7 @@ const Login = () => {
 					Login to your account
 				</h2>
 				<div className="p-4 flex justify-center">
-					<form className="form-user" onSubmit={submitLogin}>
+					<form className="form-user">
 						<div className="mb-3">
 							<label htmlFor="id_username" className="form-label">
 								Username:
@@ -95,12 +96,9 @@ const Login = () => {
 							<input
 								type="text"
 								name="username"
-								required
 								autoFocus
 								autoComplete="true"
 								id="id_username"
-								maxLength={50}
-								minLength={3}
 								className="form-control"
 								onChange={(e) => setUsername(e.target.value)}
 							/>
@@ -112,22 +110,27 @@ const Login = () => {
 							<input
 								type="password"
 								name="password"
-								required
 								id="id_password"
-								minLength={7}
 								autoComplete="true"
 								className="form-control"
 								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>
 						<div className="d-flex justify-content-center">
-							<input type="submit" value="Login" className="btn btn-primary" />
+							<input
+								type="button"
+								value="Login"
+								className="btn btn-primary"
+								onClick={(e) => {
+									submitLogin()
+								}}
+							/>
 						</div>
 						<br />
 						<span className="text-primary-text-color">
 							Don't have an account?{" "}
 						</span>
-						<a href="/signup">Sign Up</a>
+						<Link to="/signup">Sign Up</Link>
 						<div className="my-2">
 							{message.content && (
 								<p
