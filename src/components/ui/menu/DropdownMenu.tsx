@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { DarkMode } from "../../../../types";
 import logoutUser from "../../../api/logoutUser";
 import { useAuth } from "../../../user/context/AuthContext";
 import DarkModeContext from "../../../user/context/DarkModeContext";
-import { DarkMode } from "../../../../types";
-import { Link } from "react-router-dom";
 
 const DropdownMenu = ({ isOpen }: any) => {
   const [isDark]: DarkMode = useContext(DarkModeContext);

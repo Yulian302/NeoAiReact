@@ -5,6 +5,7 @@ import {
 	useEffect,
 	useState,
 } from "react"
+
 import { Link, useNavigate } from "react-router-dom"
 import { GOOGLE_AUTH_URL, params } from "../../api/google-0auth"
 import loginUser from "../../api/loginUser"
@@ -58,7 +59,6 @@ const Login = () => {
 			})
 		}
 	}
-
 	const loginWith0Auth = (provider: string) => {
 		switch (provider) {
 			case "google": {

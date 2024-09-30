@@ -1,7 +1,7 @@
 {
   "name": "neoai",
   "version": "0.1.0",
-  "proxy": "https://localhost/",
+  "proxy": "https://sampledomain.space/",
   "private": true,
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",

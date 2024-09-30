@@ -5,7 +5,7 @@ const params = {
   response_type: "code",
   client_id:
     "676408612507-qgtn63janua692gmjtoo95i7k166rg8i.apps.googleusercontent.com",
-  redirect_uri: `https://localhost:8000/${REDIRECT_URI}`,
+  redirect_uri: `https://sampledomain.space/${REDIRECT_URI}`,
   scope,
 };
 
