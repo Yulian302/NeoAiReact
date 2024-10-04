@@ -1,13 +1,7 @@
-import axios from "../axiosConfig";
+import axios from "../axiosConfig"
 
 const logoutUser = async () => {
-  return await axios.post(
-    "auth/logout/",
-    JSON.stringify({
-      refresh: sessionStorage.getItem("refresh"),
-    }),
-    {}
-  );
-};
+	return await axios.post("auth/logout/", null, { withCredentials: true })
+}
 
-export default logoutUser;
+export default logoutUser

@@ -7,8 +7,8 @@ import {
 } from "react"
 
 import { Link, useNavigate } from "react-router-dom"
-import { GOOGLE_AUTH_URL, params } from "../../api/google-0auth"
 import loginUser from "../../api/loginUser"
+import axios from "../../axiosConfig"
 import DarkLightButton from "../../components/ui/DarkLightButton"
 import Logo from "../../components/ui/Logo"
 import { useAuth } from "../context/AuthContext"
@@ -59,24 +59,18 @@ const Login = () => {
 			})
 		}
 	}
-	const loginWith0Auth = (provider: string) => {
+	async function oAuth2Login(provider: "github" | "google") {
 		switch (provider) {
-			case "google": {
-				const urlParams = new URLSearchParams(params).toString()
-				window.location = `${GOOGLE_AUTH_URL}?${urlParams}` as
-					| Location
-					| (string & Location)
-				break
-			}
 			case "github": {
-				const urlParams = new URLSearchParams(params).toString()
-				window.location = `${GOOGLE_AUTH_URL}?${urlParams}` as
-					| Location
-					| (string & Location)
+				const response = await axios.get("/auth/redirect-url/")
+				if (response.status === 200) {
+					window.location.href = response.data
+				}
 				break
 			}
 		}
 	}
+
 	return (
 		<>
 			<div
@@ -157,9 +151,9 @@ const Login = () => {
 								</div>
 							</div>
 							<div className="mt-2 grid grid-cols-2 gap-2">
-								<a
+								<button
 									type="button"
-									onClick={() => loginWith0Auth("github")}
+									onClick={() => oAuth2Login("github")}
 									className="flex justify-center items-center gap-[0.75rem] no-underline bg-black px-[0.75rem] py-[0.75rem] text-white rounded hover:scale-105 border-1 border-primary-text-color"
 								>
 									<svg
@@ -175,10 +169,9 @@ const Login = () => {
 										></path>
 									</svg>
 									<span className="font-medium leading-6 text-sm">Github</span>
-								</a>
-								<a
+								</button>
+								<button
 									type="button"
-									onClick={() => loginWith0Auth("google")}
 									className="flex justify-center items-center gap-[0.75rem] no-underline  bg-white px-[0.75rem] py-[0.75rem] text-gray-600 rounded border-2 shadow-md hover:scale-105"
 								>
 									<svg
@@ -220,7 +213,7 @@ const Login = () => {
 										></path>
 									</svg>
 									<span className="font-medium leading-6 text-sm">Google</span>
-								</a>
+								</button>
 							</div>
 						</div>
 					</form>

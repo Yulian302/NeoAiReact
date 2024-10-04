@@ -15,12 +15,4 @@ instance.interceptors.request.use((config) => {
 	return config
 })
 
-// instance.interceptors.response.use(function (response) {
-//   if (response.status === 401) {
-//     sessionStorage.removeItem("access");
-//     sessionStorage.removeItem("refresh");
-//     window.location = "/login";
-//   }
-//   return response;
-// });
 export default instance
