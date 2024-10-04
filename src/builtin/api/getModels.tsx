@@ -1,9 +1,9 @@
-import { AxiosResponse } from "axios";
-import { Models } from "../../templates/models/types";
-import axios from "../../axiosConfig";
+import { AxiosResponse } from "axios"
+import { Models } from "../../templates/models/types"
+import axios from "../../axiosConfig"
 
 const getModels = async (): Promise<AxiosResponse<Models>> => {
-  return await axios.get<Models>("models/", {});
-};
+	return await axios.get<Models>("models/", { withCredentials: true })
+}
 
-export default getModels;
+export default getModels

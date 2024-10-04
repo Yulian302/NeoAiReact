@@ -9,9 +9,10 @@ const ModelsTemplate = ({ models }: any) => {
 						<Link to={`${model.id}/`} className="no-underline" key={i}>
 							<div className="flex flex-col items-start gap-2.5  hover:scale-105 ease-in-out duration-200 w-48 h-48">
 								<img
-									src={model.image.replace(/\.(jpg|png)$/, ".webp")}
+									src={model.image}
 									alt={model.name}
 									className="object-fit-cover w-full h-full"
+									loading="lazy"
 								/>
 								<div className="w-full flex justify-center">
 									<span className="text-gray-800 text-sm">

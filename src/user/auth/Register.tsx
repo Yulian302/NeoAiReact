@@ -52,7 +52,6 @@ const Register = () => {
 	const submitRegister = async (event: any) => {
 		event.preventDefault()
 		const errors = validateUserInput(username, password, repeatPassword)
-		console.log(errors)
 
 		if (errors) {
 			setFormErrors(errors as any)

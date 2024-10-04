@@ -1,11 +1,11 @@
-import { AxiosResponse } from "axios";
-import { Model } from "../../templates/models/types";
-import axios from "../../axiosConfig";
+import { AxiosResponse } from "axios"
+import { Model } from "../../templates/models/types"
+import axios from "../../axiosConfig"
 
 const getModelDetails = async (
-  modelId: number
+	modelId: number
 ): Promise<AxiosResponse<Model>> => {
-  return await axios.get<Model>(`models/${modelId}/`, {});
-};
+	return await axios.get<Model>(`models/${modelId}/`, { withCredentials: true })
+}
 
-export default getModelDetails;
+export default getModelDetails
